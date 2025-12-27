@@ -484,7 +484,6 @@ const App = () => {
           </div>
         )}
 
-        // Main App Component - Part 3: Dashboard UI
 
         {/* Top Navigation */}
         <div className="flex justify-between items-center mb-4">
