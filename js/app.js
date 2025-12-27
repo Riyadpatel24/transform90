@@ -1,7 +1,6 @@
-// Main App Component - Part 1: Setup & Core Logic
+
 const { useState, useEffect } = React;
 
-// Storage wrapper for localStorage
 window.storage = {
   get: async (key) => {
     const val = localStorage.getItem(key);
@@ -13,13 +12,12 @@ window.storage = {
   }
 };
 
-// Main App Wrapper with Auth
 const MainApp = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user has valid session
+
     if (!AuthSystem.hasPIN() || AuthSystem.hasValidSession()) {
       setIsAuthenticated(true);
     }
@@ -41,9 +39,8 @@ const MainApp = () => {
   return <App />;
 };
 
-// Main Transformation App
 const App = () => {
-  // State Management
+
   const [currentDay, setCurrentDay] = useState(1);
   const [level, setLevel] = useState(1);
   const [dailyTasks, setDailyTasks] = useState({
@@ -134,7 +131,6 @@ const App = () => {
     "You're becoming her. One day at a time."
   ];
 
-  // Helper Functions
   const getDailyMessage = () => messages[currentDay % messages.length];
   const isWeekday = () => new Date().getDay() >= 1 && new Date().getDay() <= 4;
   const getActiveTasks = () => levels[level].tasks[isWeekday() ? 'weekday' : 'weekend'];
@@ -148,10 +144,7 @@ const App = () => {
     }
   };
 
-  // Data Management
   useEffect(() => { loadData(); }, []);
-
-  // Auto-sync every 5 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       const allData = {
@@ -184,7 +177,6 @@ const App = () => {
   const saveData = async (data) => {
     try { 
       await window.storage.set('tracker-data', JSON.stringify(data));
-      // Also trigger cloud sync
       SyncSystem.autoSync(data);
     }
     catch (e) { console.error('Save failed'); }
@@ -268,9 +260,6 @@ const App = () => {
   const activeTasks = getActiveTasks();
   const todayIsWeekday = isWeekday();
 
-  // Main App Component - Part 2: Modals and UI Components
-
-  // Return JSX - Part 2: Modals
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 p-2 sm:p-4 pb-20">
       <div className="max-w-2xl mx-auto">
@@ -630,8 +619,6 @@ const App = () => {
           </div>
         </div>
 
-        // Main App Component - Part 4: Final Components & Render
-
         {/* Evening Reflection */}
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-4 sm:p-5 mb-4 sm:mb-6 border border-white/20">
           <h2 className="text-lg sm:text-xl font-bold text-white mb-4">Evening Reflection</h2>
@@ -744,5 +731,4 @@ const App = () => {
   );
 };
 
-// Render the app
 ReactDOM.render(<MainApp />, document.getElementById('root'));
