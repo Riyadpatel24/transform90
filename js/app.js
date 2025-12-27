@@ -475,8 +475,15 @@ const App = () => {
 
 
         {/* Top Navigation */}
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold text-white">Transform90</h1>
+        <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-white">
+                Transform90
+            </h1>
+
+            <span className="text-xs bg-white/10 px-2 py-1 rounded-full text-white/80">
+                v1.0 • Stable
+            </span>
+        </div>
           <div className="flex gap-2">
             <button
               onClick={() => setShowAnalytics(true)}
@@ -517,9 +524,15 @@ const App = () => {
           
           <div className="bg-white/5 rounded-xl p-3 mb-3">
             <div className="flex justify-between text-xs mb-2">
-              <span className="text-white/70">Level Progress</span>
-              <span className="text-white font-semibold">{perfectDaysAtLevel}/{currentLevel.unlockAt || '∞'}</span>
+            <span className="text-white/70">Level Progress</span>
+            <span className="text-white font-semibold">
+                {perfectDaysAtLevel}/{currentLevel.unlockAt || '∞'}
+                <p className="text-xs text-white/60 mt-2">
+                System Status: Active • Sync OK
+                </p>
+            </span>
             </div>
+
             {currentLevel.unlockAt && (
               <div className="w-full bg-white/10 rounded-full h-2 mb-3">
                 <div className="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full transition-all"
@@ -570,9 +583,10 @@ const App = () => {
 
         {/* Today's Tasks */}
         <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-4 sm:p-5 mb-4 sm:mb-6 border border-white/20">
-          <h2 className="text-lg sm:text-xl font-bold text-white mb-2 flex items-center gap-2">
-            <span>🎯</span> Today's Tasks
-          </h2>
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-2">
+            🎯 Today's Tasks <span className="text-xs text-white/50">(Core Module)</span>
+            </h2>
+
           <p className="text-white/60 text-xs mb-4">{currentLevel.description}</p>
           
           <div className="space-y-3">
@@ -727,7 +741,6 @@ const App = () => {
         </div>
 
       </div>
-    </div>
   );
 };
 
